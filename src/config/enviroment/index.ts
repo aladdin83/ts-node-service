@@ -13,6 +13,9 @@ const all: HekaConfig = {
   secrets: {
     session: "session-secret"
   },
+  session: {
+    lifetime: 60 * 60 * 5
+  },
   mongo: {
     useNewUrlParser: true
   }

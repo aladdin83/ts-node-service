@@ -1,6 +1,7 @@
 import * as express from "express";
 import * as mongoose from "mongoose";
 import * as http from "http";
+import { CronJob } from "cron";
 
 import registerRoutes from "./routes";
 import expressConfig from "./config/express";
@@ -13,6 +14,7 @@ class App {
   config: HekaConfig;
   db: mongoose.Connection;
   server: http.Server;
+  cronJobs: any;
   constructor() {
     this.config = config;
     this.express = express();
@@ -21,6 +23,7 @@ class App {
 
     expressConfig(this.express, this.config);
     registerRoutes(this.express);
+    this.setupRssSyncService()
   }
 
   initDatabaseConnection() {
@@ -36,6 +39,11 @@ class App {
 
   dbConnectionSuccess() {
 
+  }
+
+  
+  setupRssSyncService() {
+    this.cronJobs["RssService"] = new CronJob()
   }
 }
 

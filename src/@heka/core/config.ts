@@ -7,8 +7,12 @@ export interface HekaConfig {
   secrets?: {
     session: string
   };
+  session?: {
+    lifetime: number
+  };
   mongo?: {
     uri?: string,
     useNewUrlParser: boolean
   };
+  userRoles?: [string];
 }
